@@ -2,9 +2,13 @@ import streamlit as st
 import pickle
 
 # 加载模型
-model_path = '/Users/luciee/Desktop/my_flask_project/random_forest_model.pkl'
-with open(model_path, 'rb') as file:
-    model = pickle.load(file)
+# 将模型文件路径改为相对路径，假设模型文件和 app.py 位于同一目录
+model_path = 'random_forest_model.pkl'
+try:
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+except FileNotFoundError:
+    st.error(f"Model file not found: {model_path}. Please ensure it is uploaded.")
 
 # 网页标题
 st.title("Random Forest Model Predictor")
